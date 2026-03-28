@@ -12,12 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (image) {
-                localStorage.setItem('activeProfileImage', image);
-                localStorage.setItem('perfilAtivoImagem', image);
+                // Pega apenas o nome do arquivo (ex: Perfil-1.jpeg)
+                const imageFileName = image.split('/').filter(Boolean).pop();
+                
+                // Define o caminho para ser usado de DENTRO da pasta catalogo
+                // O ../assets/ volta uma pasta para achar a imagem
+                const catalogImagePath = `../assets/${imageFileName}`;
+                
+                localStorage.setItem('activeProfileImage', catalogImagePath);
+                localStorage.setItem('perfilAtivoImagem', catalogImagePath);
             }
 
-            event.preventDefault();
-            window.location.href = link.href;
+            // Deixa o link seguir para a página do catálogo
+            // Removi o preventDefault para o link funcionar normalmente
         });
     });
 });
